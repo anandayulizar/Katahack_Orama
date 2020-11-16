@@ -44,18 +44,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        
+        screenOptions={{
+          headerShown: false
+        }}
       >
-        { user ? (
+        {user ? (
           <Stack.Screen name="Home">
             {props => <Home {...props} />}
           </Stack.Screen>
         ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )}
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Registration" component={RegistrationScreen} />
+            </>
+          )}
       </Stack.Navigator>
     </NavigationContainer>
   );

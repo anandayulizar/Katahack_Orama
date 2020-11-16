@@ -5,7 +5,7 @@ import { globalStyles } from '../../style/global';
 
 export default function GamePickerScreen({ route, navigation }) {
     const [games, setGames] = useState([
-        { title: 'Game 1', description: 'ini adalah game pertama dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'green', key: '0' },
+        { title: 'Name the Picture', description: 'Guess the name of the object in the picture and say it to me!', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'green', key: '0' },
         { title: 'Game 2', description: 'ini adalah game kedua dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'yellow', key: '1' },
         { title: 'Game 3', description: 'ini adalah game ketiga dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'red', key: '2' },
         { title: 'Game 4', description: 'ini adalah game keempat dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'turquoise', key: '3' },
@@ -43,7 +43,6 @@ export default function GamePickerScreen({ route, navigation }) {
                     );
                 }}
             />
-
         </View>
     )
 }
