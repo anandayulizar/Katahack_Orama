@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import { globalStyles } from '../../style/global';
-import { Entypo } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
+
+import { firebase } from '../../config/config';
 
 export default function LevelPickerScreen({ route, navigation }) {
-    const [games, setGames] = useState([
-        { level: '1', passed: true },
-        { level: '2', passed: false },
-        { level: '3', passed: false },
-        { level: '4', passed: false }
-    ])
-
     const { gameTitle } = route.params;
+    const [games, setGames] = useState([]);
+    const [highestLevel, setHighestLevel] = useState(0);
+
+    useEffect(() => {
+        firebase.firestore().collection('progress').doc(gameTitle.toLowerCase()).get().then((doc) => {
+            if (!doc.exists) return;
+            const highestLevel = doc.data().highestLevel;
+            const gameList = [];
+            for (let i = 1; i <= 3; i++) {
+                gameList.push({ level: i, passed: i < highestLevel });
+            }
+            setGames(gameList);
+            setHighestLevel(highestLevel);
+        });
+    }, []);
 
     navigation.setOptions({
         title: gameTitle,
-    })
+    });
 
     const getColor = (num) => {
         const colors = ['green', 'yellow', 'red', 'turquoise'];
@@ -30,7 +39,7 @@ export default function LevelPickerScreen({ route, navigation }) {
                 data={games}
                 keyExtractor={(item) => item.level}
                 renderItem={({ item }) => {
-                    let icon = item.passed ? 'check' : 'cross';
+                    let icon = item.passed ? 'check' : 'lock';
                     return (
                         <TouchableOpacity
                             style={{ ...styles.gameContainer, borderColor: getColor(parseInt(item.level) % 4) }}
@@ -40,7 +49,9 @@ export default function LevelPickerScreen({ route, navigation }) {
                             })}
                         >
                             <Text style={styles.levelTitle}>Level {item.level} </Text>
-                            <Entypo name={icon} size={60} color="white" />
+
+                            {parseInt(item.level) == highestLevel ? <Text></Text> : <EvilIcons name={icon} size={60} color="white" />}
+
                         </TouchableOpacity>
                     );
                 }}

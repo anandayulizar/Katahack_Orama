@@ -4,7 +4,9 @@ import { firebase } from '../../config/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 
-export default function RegistrationScreen({navigation}) {
+import { globalStyles } from '../../style/global';
+
+export default function RegistrationScreen({ navigation }) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -34,7 +36,7 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data})
+                        navigation.navigate('Home', { user: data })
                     })
                     .catch((error) => {
                         alert(error)
@@ -42,18 +44,19 @@ export default function RegistrationScreen({navigation}) {
             })
             .catch((error) => {
                 alert(error)
-        });
+            });
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{ ...globalStyles.container, paddingTop: 100 }}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                {/* <Image
+                <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                /> */}
+                    source={require('../../../assets/temp-logo.png')}
+                />
+                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20 }} >Orama</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'

@@ -27,23 +27,23 @@ export default function DashboardScreen({ navigation }) {
                 <View style={styles.gameRow}>
                     <TouchableOpacity
                         style={styles.categoryContainer}
-                        onPress={() => navigationHandler('Verbal')}
+                        onPress={() => navigationHandler('Words')}
                     >
                         <Image
                             style={styles.categoryImage}
                             source={require('../../../assets/temp-logo.png')}
                         />
-                        <Text style={styles.categoryTitle}>Verbal</Text>
+                        <Text style={styles.categoryTitle}>Words</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.categoryContainer}
-                        onPress={() => navigationHandler('Numerik')}
+                        onPress={() => navigationHandler('Number')}
                     >
                         <Image
                             style={styles.categoryImage}
                             source={require('../../../assets/temp-logo.png')}
                         />
-                        <Text style={styles.categoryTitle}>Numerik</Text>
+                        <Text style={styles.categoryTitle}>Number</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.gameRow}>
@@ -59,13 +59,13 @@ export default function DashboardScreen({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.categoryContainer}
-                        onPress={() => navigationHandler('Visual')}
+                        onPress={() => navigationHandler('Picture')}
                     >
                         <Image
                             style={styles.categoryImage}
                             source={require('../../../assets/temp-logo.png')}
                         />
-                        <Text style={styles.categoryTitle}>Visual</Text>
+                        <Text style={styles.categoryTitle}>Picture</Text>
                     </TouchableOpacity>
                 </View>
             </View>
