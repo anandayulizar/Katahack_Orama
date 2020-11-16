@@ -1,84 +1,60 @@
-import React from 'react';
-import { StyleSheet, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { firebase } from './src/config/config';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import LoginScreen from './src/screens/Login/LoginScreen';
+import RegistrationScreen from './src/screens/Registration/RegistrationScreen';
+import Home from './src/screens/Home';
 
-import HomeScreen from './src/screens/Home/Index';
-import AchievementScreen from './src/screens/Achievement/Index';
-import LeaderboardScreen from './src/screens/Leaderboard/Index';
-import ProfileScreen from './src/screens/Profile/Index';
-
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
+
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+
+  // if (loading) {	
+  //   return (	
+  //     <></>	
+  //   )	
+  // }
+
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data()
+            setLoading(false)
+            setUser(userData)
+          })
+          .catch((error) => {
+            setLoading(false)
+          });
+      } else {
+        setLoading(false)
+      }
+    });
+  }, []);
+
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        tabBarOptions={{
-          activeBackgroundColor: '#C5CC6D0',
-          style: {
-            height: 60,
-            paddingBottom: 8,
-            backgroundColor: '#181919',
-          }
-        }}
-      >
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            tabBarIcon: () => (
-              <Image
-                style={styles.tabIcon}
-                source={require('./assets/icon-home.png')
-                } />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Achievement"
-          component={AchievementScreen}
-          options={{
-            tabBarIcon: () => (
-              <Image
-                style={styles.tabIcon}
-                source={require('./assets/icon-achievement.png')
-                } />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Leaderboard"
-          component={LeaderboardScreen}
-          options={{
-            tabBarIcon: () => (
-              <Image
-                style={styles.tabIcon}
-                source={require('./assets/icon-leaderboard.png')
-                } />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            tabBarIcon: () => (
-              <Image
-                style={styles.tabIcon}
-                source={require('./assets/icon-profile.png')
-                } />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        { user ? (
+          <Stack.Screen name="Home">
+            {props => <Home {...props} />}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} />
+          </>
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  tabIcon: {
-    width: 25,
-    height: 25
-  }
-})

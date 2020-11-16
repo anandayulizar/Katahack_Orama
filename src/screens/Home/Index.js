@@ -9,6 +9,8 @@ import DashboardScreen from './DashboardScreen';
 import GamePickerScreen from './GamePickerScreen';
 import Chatbot from './Chatbot'
 import GameplayScreen from './GameplayScreen';
+import LoginScreen from '../Login/LoginScreen';
+import RegistrationScreen from '../Registration/RegistrationScreen';
 
 const Stack = createStackNavigator();
 
