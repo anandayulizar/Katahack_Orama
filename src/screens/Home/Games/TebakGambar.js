@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Image, Button } from 'react-native';
-
+import { firebase } from '../../../config/config';
 import { globalStyles } from '../../../style/global';
 
-export default function () {
-    const [answer, setAnswer] = useState('');
+export default function ({ answer, imgName, setStage }) {
+    const [answerInput, setAnswerInput] = useState('');
+    const [imgUrl, setImgUrl] = useState('');
 
+    useEffect(() => {
+        let imageRef = firebase.storage().ref('dataset-game/' + imgName);
+        imageRef
+        .getDownloadURL()
+        .then((url) => {
+            console.log(url);
+            setImgUrl(url);
+        })
+        .catch((e) => console.log('getting downloadURL of image error => ', e));
+    }, []);
+
+    const handlePress = () => {
+        console.log('pressed');
+        if(answerInput.toLowerCase() === answer){
+            console.log('yee');
+            setStage(prev => prev+1);
+        }
+    }
     return (
         <View style={styles.gameContainer}>
-            <Image style={styles.guessImg} source={{ uri: 'http://clipart-library.com/images/6cr6d9qcK.gif' }} />
+            {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
             <TextInput
                 style={styles.answerInput}
                 placeholder='What image is it?'
-                onChangeText={(answer) => setAnswer(answer)}
-                value={answer}
+                onChangeText={(answer) => setAnswerInput(answer)}
+                value={answerInput}
             />
             <Button
                 title='Submit Answer'
+                onPress={handlePress}
             />
         </View>
     );

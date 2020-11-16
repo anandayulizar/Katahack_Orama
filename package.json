@@ -29,6 +29,7 @@
     "react-native-safe-area-context": "0.6.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-uuid": "^1.4.9",
+    "react-native-voice": "^0.3.0",
     "react-navigation": "^4.1.0",
     "react-navigation-stack": "^2.0.16",
     "react-navigation-tabs": "^2.10.1",
