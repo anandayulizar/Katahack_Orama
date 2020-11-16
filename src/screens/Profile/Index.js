@@ -1,15 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { firebase } from '../../config/config';
 import { globalStyles } from '../../style/global';
 
 const Stack = createStackNavigator();
 
 function Dashboard({ navigation }) {
+    const logout = () => {
+        firebase.auth().signOut().then(() => {
+            navigation.navigate('Login');
+        }).catch(err => console.log(err.message));
+    }
     return (
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Profile euyy</Text>
+            <Button onPress={logout} title='Log out' />
         </View>
     )
 }

@@ -43,7 +43,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        
+      >
         { user ? (
           <Stack.Screen name="Home">
             {props => <Home {...props} />}
