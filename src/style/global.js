@@ -21,7 +21,13 @@ export const globalStyles = StyleSheet.create({
     title: {
         color: 'white',
         fontSize: 30,
-        fontWeight: '500',
+        fontWeight: '700',
         letterSpacing: 0.5,
+    },
+    secondaryTitle: {
+        fontSize: 16,
+        color: 'white',
+        fontWeight: '500',
+        marginTop: 10,
     }
 })
