@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Styles
@@ -7,7 +6,9 @@ import { globalStyles } from '../../style/global';
 
 // Screens
 import DashboardScreen from './DashboardScreen';
-import ChatScreen from './ChatScreen';
+import GamePickerScreen from './GamePickerScreen';
+import Chatbot from './Chatbot'
+import GameplayScreen from './GameplayScreen';
 import LoginScreen from '../Login/LoginScreen';
 import RegistrationScreen from '../Registration/RegistrationScreen';
 
@@ -32,9 +33,23 @@ export default function HomeScreen({ navigation }) {
             />
             <Stack.Screen
                 name='Chat'
-                component={ChatScreen}
+                component={Chatbot}
                 options={{
                     title: 'Chat'
+                }}
+            />
+            <Stack.Screen
+                name='Game'
+                component={GamePickerScreen}
+                options={{
+                    title: 'Pick a game'
+                }}
+            />
+            <Stack.Screen
+                name='Gameplay'
+                component={GameplayScreen}
+                options={{
+                    title: 'Play game!'
                 }}
             />
         </Stack.Navigator>
