@@ -8,6 +8,8 @@ import { globalStyles } from '../../style/global';
 // Screens
 import DashboardScreen from './DashboardScreen';
 import ChatScreen from './ChatScreen';
+import LoginScreen from '../Login/LoginScreen';
+import RegistrationScreen from '../Registration/RegistrationScreen';
 
 const Stack = createStackNavigator();
 
