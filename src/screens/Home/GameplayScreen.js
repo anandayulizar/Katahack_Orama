@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 import { globalStyles } from '../../style/global';
 
 export default function GameplayScreen({ route, navigation }) {
-    const { gameTitle } = route.params;
+    const { gameTitle, level } = route.params;
 
     navigation.setOptions({
         title: gameTitle,
@@ -12,7 +12,7 @@ export default function GameplayScreen({ route, navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={{ color: 'white' }}>Let's play {gameTitle}</Text>
+            <Text style={{ color: 'white' }}>{gameTitle} level {level}</Text>
         </View>
     )
 }

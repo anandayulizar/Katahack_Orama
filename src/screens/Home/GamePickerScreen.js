@@ -30,7 +30,7 @@ export default function GamePickerScreen({ route, navigation }) {
                     return (
                         <TouchableOpacity
                             style={{ ...styles.gameContainer, borderColor: getColor(parseInt(item.key) % 4) }}
-                            onPress={() => navigation.navigate('Gameplay', {
+                            onPress={() => navigation.navigate('LevelPicker', {
                                 gameTitle: item.title,
                             })}
                         >
@@ -50,7 +50,7 @@ export default function GamePickerScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
     gameContainer: {
-        borderWidth: 1,
+        borderWidth: 2,
         paddingVertical: 20,
         paddingHorizontal: 20,
         borderRadius: 20,

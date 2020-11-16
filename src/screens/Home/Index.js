@@ -9,8 +9,7 @@ import DashboardScreen from './DashboardScreen';
 import GamePickerScreen from './GamePickerScreen';
 import Chatbot from './Chatbot'
 import GameplayScreen from './GameplayScreen';
-import LoginScreen from '../Login/LoginScreen';
-import RegistrationScreen from '../Registration/RegistrationScreen';
+import LevelPickerScreen from './LevelPickerScreen';
 
 const Stack = createStackNavigator();
 
@@ -43,6 +42,13 @@ export default function HomeScreen({ navigation }) {
                 component={GamePickerScreen}
                 options={{
                     title: 'Pick a game'
+                }}
+            />
+            <Stack.Screen
+                name='LevelPicker'
+                component={LevelPickerScreen}
+                options={{
+                    title: 'Pick a level'
                 }}
             />
             <Stack.Screen
