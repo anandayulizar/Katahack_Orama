@@ -27,4 +27,21 @@ class User {
                 alert(error)
         });
     }
+
+    async getUserData(){
+        const user = await firebase.auth().currentUser;
+        const result = await firebase.firestore()
+                        .collection('users')
+                        .doc(user.uid)
+                        .get()
+                        .then(snapshot => {
+                            return (snapshot.data());
+                        })
+                        .catch(err => {
+                            console.log('Error getting documents', err);
+                        });
+        return result;
+    }
 }
+
+export default new User();

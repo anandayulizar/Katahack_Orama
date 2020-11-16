@@ -10,7 +10,7 @@ import ProfileScreen from './Profile/Index';
 
 const Tab = createBottomTabNavigator();
 
-export default function Home({ navigation }) {
+export default function Home({ route, navigation }) {
   return (
       <Tab.Navigator
         tabBarOptions={{
