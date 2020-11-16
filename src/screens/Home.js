@@ -12,7 +12,6 @@ const Tab = createBottomTabNavigator();
 
 export default function Home() {
   return (
-    <NavigationContainer>
       <Tab.Navigator
         tabBarOptions={{
           activeBackgroundColor: '#C5CC6D0',
@@ -72,7 +71,6 @@ export default function Home() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
 
