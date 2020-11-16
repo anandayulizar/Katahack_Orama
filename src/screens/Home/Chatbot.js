@@ -5,6 +5,12 @@ import { Dialogflow_V2 } from 'react-native-dialogflow';
 
 import { dialogflowConfig } from '../../config/env';
 
+import Voice, {
+  SpeechRecognizedEvent,
+  SpeechResultsEvent,
+  SpeechErrorEvent,
+} from '@react-native-community/voice';
+
 import { IconButton } from 'react-native-paper';
 
 const BOT_USER = {
@@ -18,7 +24,7 @@ class Chatbot extends Component {
     messages: [
       {
         _id: 1,
-        text: `Hi! I am the FAQ bot 🤖 from Jscrambler.\n\nHow may I help you with today?`,
+        text: `Say rama!`,
         createdAt: new Date(),
         user: BOT_USER
       }
