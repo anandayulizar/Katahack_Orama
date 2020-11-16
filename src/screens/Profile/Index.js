@@ -43,6 +43,8 @@ function Dashboard({ navigation }) {
     }, []);
     const logout = () => {
         firebase.auth().signOut().then(() => {
+            // navigation.navigate('Login');
+            
             navigation.navigate('Login');
         }).catch(err => console.log(err.message));
     }

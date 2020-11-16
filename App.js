@@ -41,23 +41,35 @@ export default function App() {
     });
   }, []);
 
+  const authScreens = {
+    Login: LoginScreen,
+    Registration: RegistrationScreen,
+  };
+  
+  const userScreens = {
+    Home: Home
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false
         }}
+        initialRouteName={(user? "Landing" : "Login")}
       >
-        {user ? (
-          <Stack.Screen name="Home">
-            {props => <Home {...props} />}
-          </Stack.Screen>
-        ) : (
-            <>
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="Registration" component={RegistrationScreen} />
-            </>
-          )}
+        {/* {Object.entries({
+          // Use some screens conditionally based on some condition
+          ...(user ? userScreens : authScreens),
+        }).map(([name, component]) => (
+          <Stack.Screen name={name} component={component} />
+        ))} */}
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registration" component={RegistrationScreen} />
+        <Stack.Screen name="Landing">
+          {props => <Home {...props} />}
+        </Stack.Screen>
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { firebase } from '../../../config/config';
 import { Button } from 'react-native';
 import { Text } from 'react-native';
 import { View } from 'react-native';
 
-const Congratulation = ({ gameTitle, level }) => {
+const Congratulation = ({ highestLevel, gameTitle, level, navigation }) => {
+    useEffect(() => {
+        var maxLevel = 0;
+        if(highestLevel > level+1){
+            maxLevel = highestLevel;
+        }else{
+            const levelInt = parseInt(level);
+            maxLevel = levelInt+1;
+        }
+        firebase.firestore()
+        .collection('progress')
+        .doc('name the picture')
+        .update({
+            highestLevel: maxLevel,
+        })
+        .then(() => {
+            console.log('User updated!');
+        });
+    }, []);
     return (  
         <View style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
             <View>
@@ -17,7 +36,7 @@ const Congratulation = ({ gameTitle, level }) => {
                     Let's go to the next level !
                 </Text>
             </View>
-            <Button title="Next"/>
+            <Button onPress={() => navigation.goBack()} title="Next"/>
         </View>
     );
 }

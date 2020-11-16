@@ -8,7 +8,7 @@ import Congratulation from './Games/Congratulation';
 import TebakGambar from './Games/TebakGambar'
 
 export default function GameplayScreen({ route, navigation }) {
-    const { gameTitle, level } = route.params;
+    const { gameTitle, level, highestLevel } = route.params;
     const [listPic, setListPic] = useState(null);
     const [noPic, setNoPic] = useState(1);
     const [componentGame, setComponentGame] = useState(undefined);
@@ -41,7 +41,7 @@ export default function GameplayScreen({ route, navigation }) {
             });
 
             if(stage === listPic.length){
-                setComponentGame(<Congratulation gameTitle={gameTitle} level={level}/>);
+                setComponentGame(<Congratulation gameTitle={gameTitle} level={level} highestLevel={highestLevel} navigation={navigation}/>);
             }else{
                 setComponentGame(component);
             }

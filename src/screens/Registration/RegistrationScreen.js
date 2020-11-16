@@ -13,7 +13,7 @@ export default function RegistrationScreen({ navigation }) {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Login')
+        navigation.navigate('Landing')
     }
 
     const onRegisterPress = () => {
@@ -36,7 +36,17 @@ export default function RegistrationScreen({ navigation }) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', { user: data })
+                        const userProgressRef = firebase.firestore().collection('userProgress')
+                        userProgressRef
+                            .doc(uid)
+                            .set({
+                                highestLevel:{
+                                    'name the picture': 1
+                                }
+                            }).then(() => {
+                                navigation.navigate('Landing', { user: data })
+                            })
+
                     })
                     .catch((error) => {
                         alert(error)
