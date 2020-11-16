@@ -17,7 +17,7 @@ export default function LevelPickerScreen({ route, navigation }) {
             const highestLevel = doc.data().highestLevel;
             const gameList = [];
             for (let i = 1; i <= 3; i++) {
-                gameList.push({ level: i, passed: i < highestLevel });
+                gameList.push({ level: i.toString(), passed: i < highestLevel });
             }
             setGames(gameList);
             setHighestLevel(highestLevel);

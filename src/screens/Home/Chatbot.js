@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextArea } from 'react-native';
-import { GiftedChat, Send, InputToolbar } from 'react-native-gifted-chat';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { GiftedChat, Send, InputToolbar, Bubble, Avatar } from 'react-native-gifted-chat';
 import { Dialogflow_V2 } from 'react-native-dialogflow';
 
 import { dialogflowConfig } from '../../config/env';
+import * as Speech from 'expo-speech';
 
 import Voice, {
   SpeechRecognizedEvent,
@@ -12,6 +13,7 @@ import Voice, {
 } from '@react-native-community/voice';
 
 import { IconButton } from 'react-native-paper';
+import { FontAwesome } from '@expo/vector-icons';
 
 const BOT_USER = {
   _id: 2,
@@ -66,6 +68,7 @@ class Chatbot extends Component {
       user: BOT_USER
     };
 
+
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, [msg])
     }));
@@ -79,6 +82,37 @@ class Chatbot extends Component {
         </View>
       </Send>
     );
+  }
+
+  renderBubble(props) {
+    return (
+      <View style={styles.bubbleContainer}>
+        <Bubble
+          {...props}
+          containerStyle={{
+            left: {
+              marginVertical: 10,
+            }
+          }}
+          wrapperStyle={{
+            left: {
+              marginRight: 0,
+            }
+          }}
+        />
+
+        { props.currentMessage.user._id == 2 ?
+          <TouchableOpacity
+            style={styles.micContainer}
+            onPress={() => Speech.speak(props.currentMessage.text)}
+          >
+            <FontAwesome name="microphone" size={24} color="black" />
+          </TouchableOpacity>
+          :
+          null
+        }
+      </View>
+    )
   }
 
   renderInputToolbar(props) {
@@ -108,6 +142,7 @@ class Chatbot extends Component {
             borderRadius: 20,
             padding: 10,
           }}
+          renderBubble={this.renderBubble}
         // renderInputToolbar={this.renderInputToolbar}
         />
       </View>
@@ -119,6 +154,21 @@ const styles = StyleSheet.create({
   sendingContainer: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  bubbleContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    // paddingRight: 50,
+  },
+  micContainer: {
+    backgroundColor: 'white',
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    marginHorizontal: 20,
   }
 })
 

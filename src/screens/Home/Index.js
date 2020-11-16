@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+
 // Styles
 import { globalStyles } from '../../style/global';
 
