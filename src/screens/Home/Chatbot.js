@@ -6,6 +6,12 @@ import { Dialogflow_V2 } from 'react-native-dialogflow';
 import { dialogflowConfig } from '../../config/env';
 import * as Speech from 'expo-speech';
 
+import Voice, {
+  SpeechRecognizedEvent,
+  SpeechResultsEvent,
+  SpeechErrorEvent,
+} from '@react-native-community/voice';
+
 import { IconButton } from 'react-native-paper';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -20,8 +26,7 @@ class Chatbot extends Component {
     messages: [
       {
         _id: 1,
-        text: `Hello! My name is Rama and I am the virtual assistant of Orama. Would you like to learn something or learn more about Orama?`,
-        // text: 'hi',
+        text: `Say rama!`,
         createdAt: new Date(),
         user: BOT_USER
       }
