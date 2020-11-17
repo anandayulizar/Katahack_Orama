@@ -40,7 +40,7 @@ export default function RegistrationScreen({ navigation }) {
                         userProgressRef
                             .doc(uid)
                             .set({
-                                highestLevel:{
+                                highestLevel: {
                                     'name the picture': 1
                                 }
                             }).then(() => {
@@ -66,7 +66,7 @@ export default function RegistrationScreen({ navigation }) {
                     style={styles.logo}
                     source={require('../../../assets/temp-logo.png')}
                 />
-                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20 }} >Orama</Text>
+                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20, fontFamily: "open-dyslexic", }} >Orama</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'

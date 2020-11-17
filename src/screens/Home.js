@@ -20,7 +20,10 @@ export default function Home({ route, navigation }) {
           height: 60,
           paddingBottom: 8,
           backgroundColor: '#181919',
-        }
+        },
+        labelStyle: {
+          fontFamily: "open-dyslexic",
+        },
       }}
     >
       <Tab.Screen
@@ -71,7 +74,7 @@ export default function Home({ route, navigation }) {
           ),
         }}
       />
-    </Tab.Navigator>
+    </Tab.Navigator >
   );
 }
 

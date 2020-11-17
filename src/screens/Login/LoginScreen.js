@@ -31,14 +31,14 @@ export default function LoginScreen({ navigation }) {
                         }
                         const user = firestoreDocument.data()
                         Keyboard.dismiss();
-                        navigation.navigate('Landing', { 
-                            screen: 'Home', 
-                            params: { 
+                        navigation.navigate('Landing', {
+                            screen: 'Home',
+                            params: {
                                 screen: 'Home',
                                 params: {
                                     user
                                 }
-                            } 
+                            }
                         })
                     })
                     .catch(error => {
@@ -51,7 +51,7 @@ export default function LoginScreen({ navigation }) {
     }
 
     useEffect(() => {
-        if(firebase.auth() != null){
+        if (firebase.auth() != null) {
             navigation.navigate('Landing');
         }
     }, []);
@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation }) {
                     style={styles.logo}
                     source={require('../../../assets/temp-logo.png')}
                 />
-                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20 }} >Orama</Text>
+                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20, fontFamily: "open-dyslexic", }} >Orama</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'

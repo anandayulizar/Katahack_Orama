@@ -24,7 +24,8 @@ export default StyleSheet.create({
         marginBottom: 10,
         marginLeft: 30,
         marginRight: 30,
-        paddingLeft: 16
+        paddingLeft: 16,
+        fontFamily: "open-dyslexic",
     },
     button: {
         backgroundColor: '#788eec',
@@ -48,7 +49,8 @@ export default StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: 'white',
+        fontFamily: "open-dyslexic"
     },
     footerLink: {
         color: "#788eec",
