@@ -72,7 +72,7 @@ export default function DashboardScreen({ route, navigation }) {
                     >
                         <Image
                             style={styles.categoryImage}
-                            source={require('../../../assets/temp-logo.png')}
+                            source={require('../../../assets/Categories/verbal-1.png')}
                         />
                         <Text style={styles.categoryTitle}>Words</Text>
                     </TouchableOpacity>
@@ -82,7 +82,7 @@ export default function DashboardScreen({ route, navigation }) {
                     >
                         <Image
                             style={styles.categoryImage}
-                            source={require('../../../assets/temp-logo.png')}
+                            source={require('../../../assets/Categories/num-1.png')}
                         />
                         <Text style={styles.categoryTitle}>Number</Text>
                     </TouchableOpacity>
@@ -94,7 +94,7 @@ export default function DashboardScreen({ route, navigation }) {
                     >
                         <Image
                             style={styles.categoryImage}
-                            source={require('../../../assets/temp-logo.png')}
+                            source={require('../../../assets/Categories/memory-1.png')}
                         />
                         <Text style={styles.categoryTitle}>Memory</Text>
                     </TouchableOpacity>
@@ -104,7 +104,7 @@ export default function DashboardScreen({ route, navigation }) {
                     >
                         <Image
                             style={styles.categoryImage}
-                            source={require('../../../assets/temp-logo.png')}
+                            source={require('../../../assets/Categories/visual-1.png')}
                         />
                         <Text style={styles.categoryTitle}>Picture</Text>
                     </TouchableOpacity>
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         marginBottom: 20,
+        borderRadius: 50
     },
     title: {
         fontFamily: "open-dyslexic",
