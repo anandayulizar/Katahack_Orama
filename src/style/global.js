@@ -23,7 +23,7 @@ export const globalStyles = StyleSheet.create({
     headerTitleStyle: {
         fontSize: 28,
         letterSpacing: 1.5,
-        fontFamily: "OpenDyslexic-Regular",
+        // fontFamily: "OpenDyslexic-Regular",
     },
     title: {
         color: 'white',

@@ -14,15 +14,21 @@ const Congratulation = ({ highestLevel, gameTitle, level, navigation }) => {
             const levelInt = parseInt(level);
             maxLevel = levelInt+1;
         }
-        firebase.firestore()
-        .collection('userProgress')
-        .doc(firebase.auth().currentUser.uid)
-        .update({
-            [attribute]: maxLevel,
-        })
-        .then(() => {
-            console.log('User updated!');
-        });
+        var user = firebase.auth();
+        if(user != null){
+            firebase.firestore()
+            .collection('userProgress')
+            .doc(user.currentUser.uid)
+            .update({
+                [attribute]: maxLevel,
+            })
+            .then(() => {
+                console.log('User updated!');
+            });
+        }else{
+            navigation.navigate('Login');
+        }
+        
     }, []);
     return (  
         <View style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>

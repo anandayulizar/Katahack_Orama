@@ -24,6 +24,8 @@ export default function ({ answer, imgName, setStage }) {
         if (answerInput.toLowerCase() === answer) {
             console.log('yee');
             setStage(prev => prev + 1);
+        } else {
+            setIncorrect(true);
         }
     }
     return (
@@ -40,15 +42,16 @@ export default function ({ answer, imgName, setStage }) {
             <View style={styles.imgContainer}>
                 {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
             </View>
+            <View style={{ marginTop: 20 }}>
+                <Text style={{ color: 'red' }}>{incorrect ? 'Incorrect Answer. Please try again.' : ''}</Text>
+            </View>
             <TextInput
                 style={styles.answerInput}
                 placeholder='What image is it?'
                 onChangeText={(answer) => setAnswerInput(answer)}
                 value={answerInput}
             />
-            <View>
-                <Text>Incorrect Answer. Please try again.</Text>
-            </View>
+
             <Button
                 title='Submit Answer'
                 onPress={handlePress}
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
     answerInput: {
         backgroundColor: 'white',
         // color: '#161F24',
-        marginTop: 50,
+        marginTop: 10,
         padding: 5,
         minWidth: 300,
         textAlign: 'center',

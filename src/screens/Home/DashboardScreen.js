@@ -5,7 +5,7 @@ import { globalStyles } from '../../style/global';
 import * as Font from 'expo-font';
 
 export default function DashboardScreen({ route, navigation }) {
-    // const [user, setUser] = useState(undefined);
+    const [user, setUser] = useState(undefined);
     async function getFonts() {
         await Font.loadAsync({
             'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
@@ -13,33 +13,37 @@ export default function DashboardScreen({ route, navigation }) {
     }
     useEffect(() => {
         getFonts();
-        // if (firebase.auth() == null) {
-        //     navigation.navigate('Login');
-        // }
-        // if (route.params !== undefined) {
-        //     if (route.params.user !== undefined) {
-        //         setUser(route.params.user);
-        //     }
-        // }
-        // firebase.firestore()
-        //     .collection('users')
-        //     .doc(firebase.auth().currentUser.uid)
-        //     .get()
-        //     .then(snapshot => {
-        //         const data = snapshot.data();
-        //         console.log(data);
-        //         setUser(data);
-        //         return data;
-        //     })
-        //     .catch(err => {
-        //         console.log('Error getting documents', err);
-        //     });
+        if (route.params !== undefined) {
+            if (route.params.user !== undefined) {
+                setUser(route.params.user);
+            }
+        }
+        var userLoggedIn = firebase.auth();
+        if (userLoggedIn == null) {
+            navigation.navigate('Login');
+        } else {
+            if (userLoggedIn.currentUser != null) {
+                firebase.firestore()
+                    .collection('users')
+                    .doc(userLoggedIn.currentUser.uid)
+                    .get()
+                    .then(snapshot => {
+                        const data = snapshot.data();
+                        console.log(data);
+                        setUser(data);
+                        return data;
+                    })
+                    .catch(err => {
+                        console.log('Error getting documents', err);
+                    });
+            }
+            console.log(userLoggedIn.currentUser);
+
+        }
+
     }, []);
     console.log(route.params);
     // const { user } = route.params;
-    const user = {
-        fullName: 'haha'
-    }
 
     const navigationHandler = (categoryTitle) => {
         navigation.navigate('Game', {
@@ -49,7 +53,7 @@ export default function DashboardScreen({ route, navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={styles.title}>Hello, {user !== undefined ? user.fullName : ''}!</Text>
+            <Text style={styles.title}>Hello, {user ? user.fullName : ''}!</Text>
             <Text style={styles.secondaryTitle}>Let's learn together!</Text>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}
