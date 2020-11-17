@@ -12,12 +12,14 @@ export default function DashboardScreen({ route, navigation }) {
                 setUser(route.params.user);
             }
         }
-        if(firebase.auth() == null){
+        var userLoggedIn = firebase.auth();
+        if(userLoggedIn == null){
             navigation.navigate('Login');
         }else{
-            firebase.firestore()
+            if(userLoggedIn.currentUser != null){
+                firebase.firestore()
                     .collection('users')
-                    .doc(firebase.auth().currentUser.uid)
+                    .doc(userLoggedIn.currentUser.uid)
                     .get()
                     .then(snapshot => {
                         const data = snapshot.data();
@@ -28,6 +30,9 @@ export default function DashboardScreen({ route, navigation }) {
                     .catch(err => {
                         console.log('Error getting documents', err);
                     });
+            }
+            console.log(userLoggedIn.currentUser);
+            
         }
         
     }, []);
@@ -42,7 +47,7 @@ export default function DashboardScreen({ route, navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Hello, {user !== undefined ? user.fullName : ''}!</Text>
+            <Text style={globalStyles.title}>Hello, {user ? user.fullName : ''}!</Text>
             <Text style={globalStyles.secondaryTitle}>Let's learn together!</Text>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}

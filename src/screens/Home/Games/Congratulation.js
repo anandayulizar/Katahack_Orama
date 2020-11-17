@@ -18,13 +18,15 @@ const Congratulation = ({ highestLevel, gameTitle, level, navigation }) => {
         if(user != null){
             firebase.firestore()
             .collection('userProgress')
-            .doc(firebase.auth().currentUser.uid)
+            .doc(user.currentUser.uid)
             .update({
                 [attribute]: maxLevel,
             })
             .then(() => {
                 console.log('User updated!');
             });
+        }else{
+            navigation.navigate('Login');
         }
         
     }, []);

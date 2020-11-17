@@ -33,9 +33,7 @@ function Dashboard({ navigation }) {
                     .catch(err => {
                         console.log('Error getting documents', err);
                     });
-        console.log('--------------');
-        // User.getUserData(setName);
-        console.log('--------------');
+
         let imageRef = firebase.storage().ref(imageName);
         imageRef
         .getDownloadURL()

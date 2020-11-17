@@ -25,6 +25,8 @@ export default function LevelPickerScreen({ route, navigation }) {
                 setGames(gameList);
                 setHighestLevel(highestInGameTitle);
             });
+        }else{
+            navigation.navigate('login');
         }
         
     }, []);
