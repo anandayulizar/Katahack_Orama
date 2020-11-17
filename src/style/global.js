@@ -2,6 +2,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { useFonts } from '@use-expo/font';
+import { getFontScale } from 'react-native/Libraries/Utilities/PixelRatio';
+
+
+
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -14,11 +18,12 @@ export const globalStyles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
         borderStyle: 'solid',
+
     },
     headerTitleStyle: {
-        fontWeight: '300',
         fontSize: 28,
         letterSpacing: 1.5,
+        fontFamily: "OpenDyslexic-Regular",
     },
     title: {
         color: 'white',

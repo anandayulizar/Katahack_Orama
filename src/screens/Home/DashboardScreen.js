@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity, Image } from 'react-native';
 
 import { globalStyles } from '../../style/global';
 
 export default function DashboardScreen({ route, navigation }) {
-    console.log(route.params);
     const { user } = route.params;
+
+    async function getFonts() {
+        await Font.loadAsync({
+            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+        })
+    }
+
+    useEffect(() => {
+        getFonts();
+    }, []);
 
     const navigationHandler = (categoryTitle) => {
         navigation.navigate('Game', {
@@ -15,15 +24,15 @@ export default function DashboardScreen({ route, navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Hello, {user.fullName}!</Text>
-            <Text style={globalStyles.secondaryTitle}>Let's learn together!</Text>
+            <Text style={styles.title}>Hello, {user.fullName}!</Text>
+            <Text style={styles.secondaryTitle}>Let's learn together!</Text>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}
                 style={styles.imgContainer}
             >
                 <Image
                     style={styles.chatImg}
-                    source={require('../../../assets/temp-logo.png')}
+                    source={require('../../../assets/temp-chat.png')}
                 />
             </TouchableOpacity>
             <View style={styles.gameContainer}>
@@ -72,7 +81,7 @@ export default function DashboardScreen({ route, navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </View >
     )
 }
 
@@ -101,10 +110,22 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 20,
+        fontFamily: "OpenDyslexic-Regular",
     },
     categoryImage: {
         width: 100,
         height: 100,
         marginBottom: 20,
+    },
+    title: {
+        fontFamily: "OpenDyslexic-Regular",
+        color: 'white',
+        fontSize: 30,
+        letterSpacing: 0.5,
+    },
+    secondaryTitle: {
+        fontFamily: "OpenDyslexic-Regular",
+        fontSize: 16,
+        color: 'white',
     }
 })

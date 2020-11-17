@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import { globalStyles } from '../../style/global';
@@ -6,9 +6,9 @@ import { globalStyles } from '../../style/global';
 export default function GamePickerScreen({ route, navigation }) {
     const [games, setGames] = useState([
         { title: 'Name the Picture', description: 'Guess the name of the object in the picture and say it to me!', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'green', key: '0' },
-        { title: 'Game 2', description: 'ini adalah game kedua dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'yellow', key: '1' },
-        { title: 'Game 3', description: 'ini adalah game ketiga dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'red', key: '2' },
-        { title: 'Game 4', description: 'ini adalah game keempat dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'turquoise', key: '3' },
+        // { title: 'Game 2', description: 'ini adalah game kedua dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'yellow', key: '1' },
+        // { title: 'Game 3', description: 'ini adalah game ketiga dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'red', key: '2' },
+        // { title: 'Game 4', description: 'ini adalah game keempat dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'turquoise', key: '3' },
     ])
 
     const { categoryTitle } = route.params;
@@ -21,6 +21,16 @@ export default function GamePickerScreen({ route, navigation }) {
         const colors = ['green', 'yellow', 'red', 'turquoise'];
         return colors[num]
     }
+
+    async function getFonts() {
+        await Font.loadAsync({
+            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+        })
+    }
+
+    useEffect(() => {
+        getFonts();
+    }, []);
 
     return (
         <View style={globalStyles.container}>
@@ -67,11 +77,12 @@ const styles = StyleSheet.create({
     gameTitle: {
         color: 'white',
         fontSize: 24,
-        fontWeight: '700',
         marginBottom: 5,
+        fontFamily: "OpenDyslexic-Regular",
     },
     gameDesc: {
         color: 'white',
         fontSize: 12,
+        fontFamily: "OpenDyslexic-Regular",
     }
 })

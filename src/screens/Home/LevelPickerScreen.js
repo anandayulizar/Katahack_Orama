@@ -11,7 +11,14 @@ export default function LevelPickerScreen({ route, navigation }) {
     const [games, setGames] = useState([]);
     const [highestLevel, setHighestLevel] = useState(0);
 
+    async function getFonts() {
+        await Font.loadAsync({
+            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+        })
+    }
+
     useEffect(() => {
+        getFonts();
         firebase.firestore().collection('userProgress').doc(firebase.auth().currentUser.uid).onSnapshot((doc) => {
             if (!doc.exists) return;
             const highestLevel = doc.data().highestLevel;
@@ -34,6 +41,16 @@ export default function LevelPickerScreen({ route, navigation }) {
         return colors[num]
     }
 
+    const levelNavigation = (item) => {
+        if (highestLevel >= parseInt(item.level)) {
+            navigation.navigate('Gameplay', {
+                gameTitle,
+                level: item.level,
+                highestLevel
+            })
+        }
+    }
+
     return (
         <View style={globalStyles.container}>
             <FlatList
@@ -44,11 +61,7 @@ export default function LevelPickerScreen({ route, navigation }) {
                     return (
                         <TouchableOpacity
                             style={{ ...styles.gameContainer, borderColor: getColor(parseInt(item.level) % 4) }}
-                            onPress={() => navigation.navigate('Gameplay', {
-                                gameTitle,
-                                level: item.level,
-                                highestLevel
-                            })}
+                            onPress={() => levelNavigation(item)}
                         >
                             <Text style={styles.levelTitle}>Level {item.level} </Text>
 
@@ -85,12 +98,8 @@ const styles = StyleSheet.create({
     levelTitle: {
         color: 'white',
         fontSize: 36,
-        fontWeight: '700',
         marginBottom: 5,
         letterSpacing: 2,
+        fontFamily: "OpenDyslexic-Regular",
     },
-    gameDesc: {
-        color: 'white',
-        fontSize: 12,
-    }
 })

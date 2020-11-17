@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
 
 
 // Styles
@@ -15,12 +16,22 @@ import LevelPickerScreen from './LevelPickerScreen';
 const Stack = createStackNavigator();
 
 export default function HomeScreen({ navigation }) {
+    async function getFonts() {
+        await Font.loadAsync({
+            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+        })
+    }
+
+    useEffect(() => {
+        getFonts();
+    }, []);
+
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: globalStyles.headerStyle,
+                headerStyle: styles.headerStyle,
                 headerTintColor: '#FFFAF0',
-                headerTitleStyle: globalStyles.headerTitleStyle,
+                headerTitleStyle: styles.headerTitleStyle,
                 headerTitleAlign: 'center',
             }}
         >
@@ -62,3 +73,20 @@ export default function HomeScreen({ navigation }) {
         </Stack.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    headerStyle: {
+        backgroundColor: '#161F24',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+        fontFamily: "OpenDyslexic-Regular",
+
+    },
+    headerTitleStyle: {
+        fontWeight: '300',
+        fontSize: 28,
+        letterSpacing: 1.5,
+        fontFamily: "OpenDyslexic-Regular",
+    },
+})

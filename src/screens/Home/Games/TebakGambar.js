@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Image, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, Button, TouchableOpacity } from 'react-native';
 import { firebase } from '../../../config/config';
 import { globalStyles } from '../../../style/global';
 
@@ -10,23 +10,32 @@ export default function ({ answer, imgName, setStage }) {
     useEffect(() => {
         let imageRef = firebase.storage().ref('dataset-game/' + imgName);
         imageRef
-        .getDownloadURL()
-        .then((url) => {
-            console.log(url);
-            setImgUrl(url);
-        })
-        .catch((e) => console.log('getting downloadURL of image error => ', e));
+            .getDownloadURL()
+            .then((url) => {
+                console.log(url);
+                setImgUrl(url);
+            })
+            .catch((e) => console.log('getting downloadURL of image error => ', e));
     }, []);
 
     const handlePress = () => {
         console.log('pressed');
-        if(answerInput.toLowerCase() === answer){
+        if (answerInput.toLowerCase() === answer) {
             console.log('yee');
-            setStage(prev => prev+1);
+            setStage(prev => prev + 1);
         }
     }
     return (
         <View style={styles.gameContainer}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Chat')}
+                style={styles.imgContainer}
+            >
+                <Image
+                    style={styles.chatImg}
+                    source={require('../../../../assets/temp-chat.png')}
+                />
+            </TouchableOpacity>
             <View style={{ width: 210, height: 210, backgroundColor: 'white' }}>
                 {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
             </View>
@@ -64,5 +73,14 @@ const styles = StyleSheet.create({
         minWidth: 300,
         textAlign: 'center',
         marginBottom: 20,
-    }
+    },
+    imgContainer: {
+        position: 'absolute',
+        right: 10,
+        top: 10,
+    },
+    chatImg: {
+        width: 50,
+        height: 50,
+    },
 })

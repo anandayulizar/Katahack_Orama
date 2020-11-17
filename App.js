@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { firebase } from './src/config/config';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -45,21 +45,21 @@ export default function App() {
     Login: LoginScreen,
     Registration: RegistrationScreen,
   };
-  
+
   const userScreens = {
     Home: Home
   };
 
-  console.log('----');
-  console.log(user);
-  console.log('----');
+  // console.log('----');
+  // console.log(user);
+  // console.log('----');
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName={(user? "Landing" : "Login")}
+        initialRouteName={(user ? "Landing" : "Login")}
       >
         {/* {Object.entries({
           // Use some screens conditionally based on some condition
@@ -70,8 +70,8 @@ export default function App() {
         <Stack.Screen name="Landing" component={Home} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
-        
-      
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

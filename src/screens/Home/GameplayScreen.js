@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { firebase } from '../../config/config';
 import { globalStyles } from '../../style/global';
 import Congratulation from './Games/Congratulation';
@@ -14,41 +14,48 @@ export default function GameplayScreen({ route, navigation }) {
     const [componentGame, setComponentGame] = useState(undefined);
     const [stage, setStage] = useState(0);
 
+    async function getFonts() {
+        await Font.loadAsync({
+            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+        })
+    }
+
     useEffect(() => {
+        getFonts();
         firebase.firestore()
-                    .collection('progress')
-                    .doc('name the picture')
-                    .get()
-                    .then(snapshot => {
-                        const data = snapshot.data();
-                        console.log(data);
-                        const listPicture = data['level-'+level];
-                        const shuffleList = listPicture.sort(() => Math.random() - 0.5)
-                        setListPic(shuffleList);
-                        // setName(data.fullName);
-                        // setEmail(data.email);
-                        return data;
-                    })
-                    .catch(err => {
-                        console.log('Error getting documents', err);
-                    });
+            .collection('progress')
+            .doc('name the picture')
+            .get()
+            .then(snapshot => {
+                const data = snapshot.data();
+                console.log(data);
+                const listPicture = data['level-' + level];
+                const shuffleList = listPicture.sort(() => Math.random() - 0.5)
+                setListPic(shuffleList);
+                // setName(data.fullName);
+                // setEmail(data.email);
+                return data;
+            })
+            .catch(err => {
+                console.log('Error getting documents', err);
+            });
     }, []);
 
     useEffect(() => {
-        if(listPic !== null) {
+        if (listPic !== null) {
             const component = listPic.map((data, idx) => {
-                if(idx === stage){
+                if (idx === stage) {
                     return <TebakGambar answer={data.answer} imgName={data.imgName} setStage={setStage} key={idx} />
                 }
             });
 
-            if(stage === listPic.length){
-                setComponentGame(<Congratulation gameTitle={gameTitle} level={level} highestLevel={highestLevel} navigation={navigation}/>);
-            }else{
+            if (stage === listPic.length) {
+                setComponentGame(<Congratulation gameTitle={gameTitle} level={level} highestLevel={highestLevel} navigation={navigation} />);
+            } else {
                 setComponentGame(component);
             }
         }
-    
+
     }, [stage, listPic]);
 
     navigation.setOptions({
@@ -58,13 +65,14 @@ export default function GameplayScreen({ route, navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
-                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 28}}>{gameTitle} Level {level}</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
+                <Text style={{ color: 'white', fontFamily: "OpenDyslexic-Regular", fontSize: 24, textAlign: 'center' }}>{gameTitle} Level {level}</Text>
             </View>
-            {componentGame !== undefined ? 
+
+            {componentGame !== undefined ?
                 componentGame : <></>
             }
-        
+
         </View>
     )
 }
