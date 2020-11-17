@@ -8,6 +8,11 @@ import RegistrationScreen from './src/screens/Registration/RegistrationScreen';
 import Home from './src/screens/Home';
 
 const Stack = createStackNavigator();
+async function getFonts() {
+  await Font.loadAsync({
+    'open-dyslexic': require('./assets/fonts/open-dyslexic.ttf'),
+  })
+}
 
 export default function App() {
 
@@ -21,6 +26,7 @@ export default function App() {
   // }
 
   useEffect(() => {
+    getFonts();
     const usersRef = firebase.firestore().collection('users');
     firebase.auth().onAuthStateChanged(user => {
       if (user) {

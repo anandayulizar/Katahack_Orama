@@ -23,9 +23,9 @@ export default function LeaderboardScreen({ navigation }) {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: globalStyles.headerStyle,
+                headerStyle: styles.headerStyle,
                 headerTintColor: '#FFFAF0',
-                headerTitleStyle: globalStyles.headerTitleStyle,
+                headerTitleStyle: styles.headerTitleStyle,
                 headerTitleAlign: 'center',
             }}
         >
@@ -43,15 +43,27 @@ export default function LeaderboardScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: 'white', 
-        minHeight: 150, 
-        marginBottom: 40, 
+        backgroundColor: 'white',
+        minHeight: 150,
+        marginBottom: 40,
         borderRadius: 20,
         paddingHorizontal: 10,
         paddingVertical: 10
     },
-    cardTitle: { 
-        fontWeight: 'bold',
-        fontSize: 24
-    }
+    cardTitle: {
+        fontSize: 24,
+        fontFamily: "open-dyslexic",
+    },
+    headerStyle: {
+        backgroundColor: '#161F24',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+
+    },
+    headerTitleStyle: {
+        fontSize: 28,
+        letterSpacing: 1.5,
+        fontFamily: "open-dyslexic",
+    },
 })
