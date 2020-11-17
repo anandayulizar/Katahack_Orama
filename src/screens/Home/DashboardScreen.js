@@ -6,15 +6,16 @@ import { globalStyles } from '../../style/global';
 export default function DashboardScreen({ route, navigation }) {
     const [user, setUser] = useState(undefined);
     useEffect(() => {
-        if(firebase.auth() == null){
-            navigation.navigate('Login');
-        }
+        
         if(route.params !== undefined){
             if(route.params.user !== undefined){
                 setUser(route.params.user);
             }
         }
-        firebase.firestore()
+        if(firebase.auth() == null){
+            navigation.navigate('Login');
+        }else{
+            firebase.firestore()
                     .collection('users')
                     .doc(firebase.auth().currentUser.uid)
                     .get()
@@ -27,6 +28,8 @@ export default function DashboardScreen({ route, navigation }) {
                     .catch(err => {
                         console.log('Error getting documents', err);
                     });
+        }
+        
     }, []);
     console.log(route.params);
     // const { user } = route.params;

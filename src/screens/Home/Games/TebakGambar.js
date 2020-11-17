@@ -38,7 +38,7 @@ export default function ({ answer, imgName, setStage }) {
                 value={answerInput}
             />
             <View>
-                <Text>Incorrect Answer. Please try again.</Text>
+                <Text style={{color: 'red'}}>{incorrect ? 'Incorrect Answer. Please try again.' : ''}</Text>
             </View>
             <Button
                 title='Submit Answer'
