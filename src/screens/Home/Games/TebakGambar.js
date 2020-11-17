@@ -27,7 +27,7 @@ export default function ({ answer, imgName, setStage }) {
     }
     return (
         <View style={styles.gameContainer}>
-            <View style={{ width: 210, height: 210, backgroundColor: 'white' }}>
+            <View style={styles.imgContainer}>
                 {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
             </View>
             <TextInput
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderColor: 'white',
         borderWidth: 1,
+        borderRadius: 20
     },
     guessImg: {
         width: 200,
@@ -64,5 +65,14 @@ const styles = StyleSheet.create({
         minWidth: 300,
         textAlign: 'center',
         marginBottom: 20,
+    },
+    imgContainer:{ 
+        width: 220, 
+        height: 220, 
+        backgroundColor: 'white', 
+        borderRadius: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

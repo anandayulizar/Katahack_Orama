@@ -51,19 +51,32 @@ function Dashboard({ navigation }) {
     return (
         <View style={globalStyles.container}>
             <View style={styles.profileContainer}>
-                <View style={styles.profile}>
-                    <View>
-                        <Text style={globalStyles.title}>{name}</Text>
-                        <Text style={globalStyles.secondaryTitle}>{email}</Text>
+                <View style={{display: 'flex'}}>
+                    <View style={styles.profile}>
+                        <View>
+                            <Text style={globalStyles.title}>{name}</Text>
+                            <Text style={globalStyles.secondaryTitle}>{email}</Text>
+                        </View>
+                        <View>
+                        {imageUrl === '' ? <Text style={globalStyles.title}></Text> :
+                            <Image source={{uri: imageUrl}}
+                            style={styles.chatImg}
+                        />
+                        }
+                        </View>
                     </View>
-                    <View>
-                    {imageUrl === '' ? <Text style={globalStyles.title}></Text> :
-                        <Image source={{uri: imageUrl}}
-                        style={styles.chatImg}
-                    />
-                    }
-                    </View>
+                    <View style={styles.card}>
+                        <Text style={styles.cardTitle}>Your Friends</Text>
+                        <View>
 
+                        </View>
+                    </View>
+                    <View style={styles.card}>
+                        <Text style={styles.cardTitle}>Last Game You've Played</Text>
+                        <View>
+
+                        </View>
+                    </View>
                 </View>
                 <Button onPress={logout} title='Log out' />
             </View>
@@ -135,5 +148,17 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between'
+    },
+    card: {
+        backgroundColor: 'white', 
+        minHeight: 150, 
+        marginBottom: 40, 
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 10
+    },
+    cardTitle: { 
+        fontWeight: 'bold',
+        fontSize: 24
     }
 })

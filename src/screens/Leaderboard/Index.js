@@ -9,7 +9,12 @@ const Stack = createStackNavigator();
 function Dashboard({ navigation }) {
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Leaderboard euyy</Text>
+            <View style={styles.card}>
+                <Text style={styles.cardTitle}>Leaderboard</Text>
+                <View>
+
+                </View>
+            </View>
         </View>
     )
 }
@@ -34,3 +39,19 @@ export default function LeaderboardScreen({ navigation }) {
         </Stack.Navigator>
     )
 }
+
+
+const styles = StyleSheet.create({
+    card: {
+        backgroundColor: 'white', 
+        minHeight: 150, 
+        marginBottom: 40, 
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 10
+    },
+    cardTitle: { 
+        fontWeight: 'bold',
+        fontSize: 24
+    }
+})
