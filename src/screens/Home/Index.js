@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontSize: 28,
+        fontSize: 24,
         letterSpacing: 1.5,
         fontFamily: "open-dyslexic",
     },
