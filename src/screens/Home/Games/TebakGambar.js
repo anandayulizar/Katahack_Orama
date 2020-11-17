@@ -6,6 +6,7 @@ import { globalStyles } from '../../../style/global';
 export default function ({ answer, imgName, setStage }) {
     const [answerInput, setAnswerInput] = useState('');
     const [imgUrl, setImgUrl] = useState('');
+    const [incorrect, setIncorrect] = useState(false);
 
     useEffect(() => {
         let imageRef = firebase.storage().ref('dataset-game/' + imgName);
@@ -36,6 +37,9 @@ export default function ({ answer, imgName, setStage }) {
                 onChangeText={(answer) => setAnswerInput(answer)}
                 value={answerInput}
             />
+            <View>
+                <Text>Incorrect Answer. Please try again.</Text>
+            </View>
             <Button
                 title='Submit Answer'
                 onPress={handlePress}

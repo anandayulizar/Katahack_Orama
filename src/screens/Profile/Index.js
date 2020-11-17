@@ -15,9 +15,13 @@ function Dashboard({ navigation }) {
     const user = firebase.auth().currentUser;
     const imageName = 'temp-logo.png';
     useEffect(() => {
+        let user = firebase.auth();;
+        if(user == null){
+            navigation.navigate('Login');
+        }
         firebase.firestore()
                     .collection('users')
-                    .doc(firebase.auth().currentUser.uid)
+                    .doc(user.currentUser.uid)
                     .get()
                     .then(snapshot => {
                         const data = snapshot.data();
