@@ -25,7 +25,7 @@ export default function GamePickerScreen({ route, navigation }) {
 
     async function getFonts() {
         await Font.loadAsync({
-            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
         })
     }
 
@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 24,
         marginBottom: 5,
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
     },
     gameDesc: {
         color: 'white',
         fontSize: 12,
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
     }
 })

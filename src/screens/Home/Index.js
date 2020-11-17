@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 export default function HomeScreen({ navigation }) {
     async function getFonts() {
         await Font.loadAsync({
-            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
         })
     }
 
@@ -84,9 +84,8 @@ const styles = StyleSheet.create({
 
     },
     headerTitleStyle: {
-        fontWeight: '300',
         fontSize: 28,
         letterSpacing: 1.5,
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
     },
 })

@@ -14,7 +14,7 @@ export default function LevelPickerScreen({ route, navigation }) {
 
     async function getFonts() {
         await Font.loadAsync({
-            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
         })
     }
 
@@ -107,6 +107,6 @@ const styles = StyleSheet.create({
         fontSize: 36,
         marginBottom: 5,
         letterSpacing: 2,
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
     },
 })

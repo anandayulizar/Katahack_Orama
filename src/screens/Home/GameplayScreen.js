@@ -17,7 +17,7 @@ export default function GameplayScreen({ route, navigation }) {
 
     async function getFonts() {
         await Font.loadAsync({
-            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
         })
     }
 
@@ -67,7 +67,7 @@ export default function GameplayScreen({ route, navigation }) {
     return (
         <View style={globalStyles.container}>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginBottom: 10 }}>
-                <Text style={{ color: 'white', fontFamily: "OpenDyslexic-Regular", fontSize: 24, textAlign: 'center' }}>{gameTitle} Level {level}</Text>
+                <Text style={{ color: 'white', fontFamily: "open-dyslexic", fontSize: 24, textAlign: 'center' }}>{gameTitle} Level {level}</Text>
             </View>
 
             {componentGame !== undefined ?

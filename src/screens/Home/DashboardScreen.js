@@ -8,7 +8,7 @@ export default function DashboardScreen({ route, navigation }) {
     const [user, setUser] = useState(undefined);
     async function getFonts() {
         await Font.loadAsync({
-            'OpenDyslexic-Regular': require('../../../assets/fonts/OpenDyslexic-Regular.otf'),
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
         })
     }
     useEffect(() => {
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     categoryTitle: {
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
         color: 'white',
         textAlign: 'center',
         fontSize: 20,
@@ -147,13 +147,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     title: {
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
         color: 'white',
         fontSize: 30,
         letterSpacing: 0.5,
+        marginBottom: 10,
     },
     secondaryTitle: {
-        fontFamily: "OpenDyslexic-Regular",
+        fontFamily: "open-dyslexic",
         fontSize: 16,
         color: 'white',
     }
