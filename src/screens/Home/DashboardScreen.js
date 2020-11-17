@@ -3,7 +3,10 @@ import { StyleSheet, View, Text, Button, TouchableOpacity, Image } from 'react-n
 
 import { globalStyles } from '../../style/global';
 
-export default function DashboardScreen({ navigation }) {
+export default function DashboardScreen({ route, navigation }) {
+    console.log(route.params);
+    const { user } = route.params;
+
     const navigationHandler = (categoryTitle) => {
         navigation.navigate('Game', {
             categoryTitle,
@@ -12,7 +15,7 @@ export default function DashboardScreen({ navigation }) {
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Hello, Orama_User!</Text>
+            <Text style={globalStyles.title}>Hello, {user.fullName}!</Text>
             <Text style={globalStyles.secondaryTitle}>Let's learn together!</Text>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}

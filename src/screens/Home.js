@@ -20,7 +20,6 @@ export default function Home({ route, navigation }) {
             height: 60,
             paddingBottom: 8,
             backgroundColor: '#181919',
-            position: 'absolute',
           }
         }}
       >

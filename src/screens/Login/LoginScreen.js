@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Image, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import { firebase } from '../../config/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
@@ -30,7 +30,16 @@ export default function LoginScreen({ navigation }) {
                             return;
                         }
                         const user = firestoreDocument.data()
-                        navigation.navigate('Landing', { user })
+                        Keyboard.dismiss();
+                        navigation.navigate('Landing', { 
+                            screen: 'Home', 
+                            params: { 
+                                screen: 'Home',
+                                params: {
+                                    user
+                                }
+                            } 
+                        })
                     })
                     .catch(error => {
                         alert(error)
@@ -40,6 +49,12 @@ export default function LoginScreen({ navigation }) {
                 alert(error)
             })
     }
+
+    useEffect(() => {
+        if(firebase.auth() != null){
+            navigation.navigate('Landing');
+        }
+    }, []);
 
     return (
         <View style={{ ...globalStyles.container, paddingTop: 100 }}>
