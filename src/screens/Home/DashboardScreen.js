@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 20,
+        letterSpacing: 2,
     },
     categoryImage: {
         width: 100,
@@ -158,5 +159,6 @@ const styles = StyleSheet.create({
         fontFamily: "open-dyslexic",
         fontSize: 16,
         color: 'white',
+        letterSpacing: 2
     }
 })
