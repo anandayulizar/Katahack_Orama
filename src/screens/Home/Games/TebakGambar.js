@@ -6,6 +6,7 @@ import { globalStyles } from '../../../style/global';
 export default function ({ answer, imgName, setStage }) {
     const [answerInput, setAnswerInput] = useState('');
     const [imgUrl, setImgUrl] = useState('');
+    const [incorrect, setIncorrect] = useState(false);
 
     useEffect(() => {
         let imageRef = firebase.storage().ref('dataset-game/' + imgName);
@@ -29,14 +30,14 @@ export default function ({ answer, imgName, setStage }) {
         <View style={styles.gameContainer}>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}
-                style={styles.imgContainer}
+                style={styles.chatContainer}
             >
                 <Image
                     style={styles.chatImg}
                     source={require('../../../../assets/temp-chat.png')}
                 />
             </TouchableOpacity>
-            <View style={{ width: 210, height: 210, backgroundColor: 'white' }}>
+            <View style={styles.imgContainer}>
                 {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
             </View>
             <TextInput
@@ -45,6 +46,9 @@ export default function ({ answer, imgName, setStage }) {
                 onChangeText={(answer) => setAnswerInput(answer)}
                 value={answerInput}
             />
+            <View>
+                <Text>Incorrect Answer. Please try again.</Text>
+            </View>
             <Button
                 title='Submit Answer'
                 onPress={handlePress}
@@ -60,6 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderColor: 'white',
         borderWidth: 1,
+        borderRadius: 20
     },
     guessImg: {
         width: 200,
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     },
-    imgContainer: {
+    chatContainer: {
         position: 'absolute',
         right: 10,
         top: 10,
@@ -83,4 +88,13 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
+    imgContainer: {
+        width: 220,
+        height: 220,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })

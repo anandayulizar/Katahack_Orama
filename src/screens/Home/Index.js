@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native';
 
 // Styles
 import { globalStyles } from '../../style/global';
+import * as Font from 'expo-font';
 
 // Screens
 import DashboardScreen from './DashboardScreen';
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 1,
         borderStyle: 'solid',
-        fontFamily: "OpenDyslexic-Regular",
 
     },
     headerTitleStyle: {

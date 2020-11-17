@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import { globalStyles } from '../../style/global';
+import * as Font from 'expo-font';
 
 export default function GamePickerScreen({ route, navigation }) {
     const [games, setGames] = useState([

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react
 
 import { globalStyles } from '../../style/global';
 import { EvilIcons } from '@expo/vector-icons';
+import * as Font from 'expo-font';
 
 import { firebase } from '../../config/config';
 

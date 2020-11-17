@@ -3,9 +3,10 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { firebase } from '../../config/config';
 import { globalStyles } from '../../style/global';
 import Congratulation from './Games/Congratulation';
+import * as Font from 'expo-font';
 
 // Games
-import TebakGambar from './Games/TebakGambar'
+import TebakGambar from './Games/TebakGambar';
 
 export default function GameplayScreen({ route, navigation }) {
     const { gameTitle, level, highestLevel } = route.params;
