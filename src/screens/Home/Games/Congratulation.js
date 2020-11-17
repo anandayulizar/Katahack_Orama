@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 const Congratulation = ({ highestLevel, gameTitle, level, navigation }) => {
     useEffect(() => {
+        const attribute = 'highestLevel.'+gameTitle.toLowerCase();
         var maxLevel = 0;
         if(highestLevel > level+1){
             maxLevel = highestLevel;
@@ -14,10 +15,10 @@ const Congratulation = ({ highestLevel, gameTitle, level, navigation }) => {
             maxLevel = levelInt+1;
         }
         firebase.firestore()
-        .collection('progress')
-        .doc('name the picture')
+        .collection('userProgress')
+        .doc(firebase.auth().currentUser.uid)
         .update({
-            highestLevel: maxLevel,
+            [attribute]: maxLevel,
         })
         .then(() => {
             console.log('User updated!');

@@ -14,11 +14,13 @@ export default function Home({ route, navigation }) {
   return (
       <Tab.Navigator
         tabBarOptions={{
+          keyboardHidesTabBar: true,
           activeBackgroundColor: '#C5CC6D0',
           style: {
             height: 60,
             paddingBottom: 8,
             backgroundColor: '#181919',
+            position: 'absolute',
           }
         }}
       >

@@ -50,6 +50,9 @@ export default function App() {
     Home: Home
   };
 
+  console.log('----');
+  console.log(user);
+  console.log('----');
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -64,11 +67,10 @@ export default function App() {
         }).map(([name, component]) => (
           <Stack.Screen name={name} component={component} />
         ))} */}
+        <Stack.Screen name="Landing" component={Home} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Registration" component={RegistrationScreen} />
-        <Stack.Screen name="Landing">
-          {props => <Home {...props} />}
-        </Stack.Screen>
+        
       
       </Stack.Navigator>
     </NavigationContainer>

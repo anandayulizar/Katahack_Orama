@@ -22,7 +22,9 @@ export default function GameplayScreen({ route, navigation }) {
                     .then(snapshot => {
                         const data = snapshot.data();
                         console.log(data);
-                        setListPic(data['level-'+level]);
+                        const listPicture = data['level-'+level];
+                        const shuffleList = listPicture.sort(() => Math.random() - 0.5)
+                        setListPic(shuffleList);
                         // setName(data.fullName);
                         // setEmail(data.email);
                         return data;

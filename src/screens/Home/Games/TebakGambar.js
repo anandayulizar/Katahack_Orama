@@ -27,7 +27,9 @@ export default function ({ answer, imgName, setStage }) {
     }
     return (
         <View style={styles.gameContainer}>
-            {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
+            <View style={{ width: 210, height: 210, backgroundColor: 'white' }}>
+                {imgUrl === '' ? <></> : <Image style={styles.guessImg} source={{ uri: imgUrl }} />}
+            </View>
             <TextInput
                 style={styles.answerInput}
                 placeholder='What image is it?'
@@ -44,7 +46,7 @@ export default function ({ answer, imgName, setStage }) {
 
 const styles = StyleSheet.create({
     gameContainer: {
-        minHeight: 500,
+        minHeight: 450,
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: 'white',
