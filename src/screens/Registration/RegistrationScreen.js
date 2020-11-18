@@ -4,14 +4,16 @@ import { firebase } from '../../config/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 
-export default function RegistrationScreen({navigation}) {
+import { globalStyles } from '../../style/global';
+
+export default function RegistrationScreen({ navigation }) {
     const [fullName, setFullName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Login')
+        navigation.navigate('Landing')
     }
 
     const onRegisterPress = () => {
@@ -34,7 +36,17 @@ export default function RegistrationScreen({navigation}) {
                     .doc(uid)
                     .set(data)
                     .then(() => {
-                        navigation.navigate('Home', {user: data})
+                        const userProgressRef = firebase.firestore().collection('userProgress')
+                        userProgressRef
+                            .doc(uid)
+                            .set({
+                                highestLevel:{
+                                    'name the picture': 1
+                                }
+                            }).then(() => {
+                                navigation.navigate('Landing', { user: data })
+                            })
+
                     })
                     .catch((error) => {
                         alert(error)
@@ -42,18 +54,19 @@ export default function RegistrationScreen({navigation}) {
             })
             .catch((error) => {
                 alert(error)
-        });
+            });
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{ ...globalStyles.container, paddingTop: 100 }}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                {/* <Image
+                <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                /> */}
+                    source={require('../../../assets/temp-logo.png')}
+                />
+                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20 }} >Orama</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
@@ -98,7 +111,7 @@ export default function RegistrationScreen({navigation}) {
                     <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
+                    <Text style={{...styles.footerText, color: 'white'}}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 
 import { globalStyles } from '../../style/global';
+import * as Font from 'expo-font';
 
 export default function GamePickerScreen({ route, navigation }) {
     const [games, setGames] = useState([
-        { title: 'Game 1', description: 'ini adalah game pertama dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'green', key: '0' },
-        { title: 'Game 2', description: 'ini adalah game kedua dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'yellow', key: '1' },
-        { title: 'Game 3', description: 'ini adalah game ketiga dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'red', key: '2' },
-        { title: 'Game 4', description: 'ini adalah game keempat dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'turquoise', key: '3' },
+        { title: 'Name the Picture', description: 'Guess the name of the object in the picture and say it to me!', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'green', key: '0' },
+        // { title: 'Game 2', description: 'ini adalah game kedua dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'yellow', key: '1' },
+        // { title: 'Game 3', description: 'ini adalah game ketiga dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'red', key: '2' },
+        // { title: 'Game 4', description: 'ini adalah game keempat dari semua game-game yang disediakan di sini yuhu', image: 'http://clipart-library.com/images/6cr6d9qcK.gif', color: 'turquoise', key: '3' },
     ])
 
     const { categoryTitle } = route.params;
@@ -22,6 +23,16 @@ export default function GamePickerScreen({ route, navigation }) {
         return colors[num]
     }
 
+    async function getFonts() {
+        await Font.loadAsync({
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
+        })
+    }
+
+    useEffect(() => {
+        getFonts();
+    }, []);
+
     return (
         <View style={globalStyles.container}>
             <FlatList
@@ -30,7 +41,7 @@ export default function GamePickerScreen({ route, navigation }) {
                     return (
                         <TouchableOpacity
                             style={{ ...styles.gameContainer, borderColor: getColor(parseInt(item.key) % 4) }}
-                            onPress={() => navigation.navigate('Gameplay', {
+                            onPress={() => navigation.navigate('LevelPicker', {
                                 gameTitle: item.title,
                             })}
                         >
@@ -43,14 +54,13 @@ export default function GamePickerScreen({ route, navigation }) {
                     );
                 }}
             />
-
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     gameContainer: {
-        borderWidth: 1,
+        borderWidth: 2,
         paddingVertical: 20,
         paddingHorizontal: 20,
         borderRadius: 20,
@@ -68,11 +78,12 @@ const styles = StyleSheet.create({
     gameTitle: {
         color: 'white',
         fontSize: 24,
-        fontWeight: '700',
         marginBottom: 5,
+        fontFamily: "open-dyslexic",
     },
     gameDesc: {
         color: 'white',
         fontSize: 12,
+        fontFamily: "open-dyslexic",
     }
 })

@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
+
 
 // Styles
 import { globalStyles } from '../../style/global';
+import * as Font from 'expo-font';
 
 // Screens
 import DashboardScreen from './DashboardScreen';
 import GamePickerScreen from './GamePickerScreen';
 import Chatbot from './Chatbot'
 import GameplayScreen from './GameplayScreen';
-import LoginScreen from '../Login/LoginScreen';
-import RegistrationScreen from '../Registration/RegistrationScreen';
+import LevelPickerScreen from './LevelPickerScreen';
 
 const Stack = createStackNavigator();
 
 export default function HomeScreen({ navigation }) {
+    async function getFonts() {
+        await Font.loadAsync({
+            'open-dyslexic': require('../../../assets/fonts/open-dyslexic.ttf'),
+        })
+    }
+
+    useEffect(() => {
+        getFonts();
+    }, []);
+
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: globalStyles.headerStyle,
+                headerStyle: styles.headerStyle,
                 headerTintColor: '#FFFAF0',
-                headerTitleStyle: globalStyles.headerTitleStyle,
+                headerTitleStyle: styles.headerTitleStyle,
                 headerTitleAlign: 'center',
             }}
         >
@@ -46,6 +58,13 @@ export default function HomeScreen({ navigation }) {
                 }}
             />
             <Stack.Screen
+                name='LevelPicker'
+                component={LevelPickerScreen}
+                options={{
+                    title: 'Pick a level'
+                }}
+            />
+            <Stack.Screen
                 name='Gameplay'
                 component={GameplayScreen}
                 options={{
@@ -55,3 +74,18 @@ export default function HomeScreen({ navigation }) {
         </Stack.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    headerStyle: {
+        backgroundColor: '#161F24',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        borderStyle: 'solid',
+
+    },
+    headerTitleStyle: {
+        fontSize: 24,
+        letterSpacing: 1.5,
+        fontFamily: "open-dyslexic",
+    },
+})

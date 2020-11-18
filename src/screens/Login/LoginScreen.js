@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Image, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import { firebase } from '../../config/config'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 
-export default function LoginScreen({navigation}) {
+import { globalStyles } from '../../style/global';
+
+export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -28,7 +30,16 @@ export default function LoginScreen({navigation}) {
                             return;
                         }
                         const user = firestoreDocument.data()
-                        navigation.navigate('Home', {user})
+                        Keyboard.dismiss();
+                        navigation.navigate('Landing', { 
+                            screen: 'Home', 
+                            params: { 
+                                screen: 'Home',
+                                params: {
+                                    user
+                                }
+                            } 
+                        })
                     })
                     .catch(error => {
                         alert(error)
@@ -39,15 +50,22 @@ export default function LoginScreen({navigation}) {
             })
     }
 
+    useEffect(() => {
+        if(firebase.auth() != null){
+            navigation.navigate('Landing');
+        }
+    }, []);
+
     return (
-        <View style={styles.container}>
+        <View style={{ ...globalStyles.container, paddingTop: 100 }}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                {/* <Image
+                <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                /> */}
+                    source={require('../../../assets/temp-logo.png')}
+                />
+                <Text style={{ ...globalStyles.title, textAlign: 'center', marginBottom: 20 }} >Orama</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'

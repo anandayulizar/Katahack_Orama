@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { firebase } from './src/config/config';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -8,6 +8,11 @@ import RegistrationScreen from './src/screens/Registration/RegistrationScreen';
 import Home from './src/screens/Home';
 
 const Stack = createStackNavigator();
+async function getFonts() {
+  await Font.loadAsync({
+    'open-dyslexic': require('./assets/fonts/open-dyslexic.ttf'),
+  })
+}
 
 export default function App() {
 
@@ -21,6 +26,7 @@ export default function App() {
   // }
 
   useEffect(() => {
+    getFonts();
     const usersRef = firebase.firestore().collection('users');
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -41,21 +47,37 @@ export default function App() {
     });
   }, []);
 
+  const authScreens = {
+    Login: LoginScreen,
+    Registration: RegistrationScreen,
+  };
+
+  const userScreens = {
+    Home: Home
+  };
+
+  // console.log('----');
+  // console.log(user);
+  // console.log('----');
   return (
     <NavigationContainer>
       <Stack.Navigator
-        
+        screenOptions={{
+          headerShown: false
+        }}
+        initialRouteName={(user ? "Landing" : "Login")}
       >
-        { user ? (
-          <Stack.Screen name="Home">
-            {props => <Home {...props} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )}
+        {/* {Object.entries({
+          // Use some screens conditionally based on some condition
+          ...(user ? userScreens : authScreens),
+        }).map(([name, component]) => (
+          <Stack.Screen name={name} component={component} />
+        ))} */}
+        <Stack.Screen name="Landing" component={Home} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Registration" component={RegistrationScreen} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
