@@ -102,7 +102,7 @@ function Chatbot({ navigation }) {
             }
           }}
         />
-        {props.currentMessage.gameParams ?
+        {props.currentMessage.text.includes('picture') && props.currentMessage.user._id == 2 ?
           <TouchableOpacity
             onPress={() => navigation.navigate('LevelPicker', {
               gameTitle: 'Name the Picture',

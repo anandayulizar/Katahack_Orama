@@ -18,24 +18,34 @@ export default function LevelPickerScreen({ route, navigation }) {
         })
     }
 
+
+
+
     useEffect(() => {
         getFonts();
-        let user = firebase.auth();
-        if (user != null) {
-            firebase.firestore().collection('userProgress').doc(user.currentUser.uid).onSnapshot((doc) => {
-                if (!doc.exists) return;
-                const highestLevel = doc.data().highestLevel;
-                const highestInGameTitle = highestLevel[gameTitle.toLowerCase()];
-                const gameList = [];
-                for (let i = 1; i <= 3; i++) {
-                    gameList.push({ level: i.toString(), passed: i < highestInGameTitle });
-                }
-                setGames(gameList);
-                setHighestLevel(highestInGameTitle);
-            });
-        } else {
-            navigation.navigate('login');
+        const highestInGameTitle = 2;
+        const gameList = [];
+        for (let i = 1; i <= 3; i++) {
+            gameList.push({ level: i.toString(), passed: i < highestInGameTitle });
         }
+        setGames(gameList);
+        setHighestLevel(highestInGameTitle);
+        // let user = firebase.auth();
+        // if (user != null) {
+        //     firebase.firestore().collection('userProgress').doc(user.currentUser.uid).onSnapshot((doc) => {
+        //         if (!doc.exists) return;
+        //         const highestLevel = doc.data().highestLevel;
+        //         const highestInGameTitle = highestLevel[gameTitle.toLowerCase()];
+        //         const gameList = [];
+        //         for (let i = 1; i <= 3; i++) {
+        //             gameList.push({ level: i.toString(), passed: i < highestInGameTitle });
+        //         }
+        //         setGames(gameList);
+        //         setHighestLevel(highestInGameTitle);
+        //     });
+        // } else {
+        //     navigation.navigate('login');
+        // }
 
     }, []);
 
